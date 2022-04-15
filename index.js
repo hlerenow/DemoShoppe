@@ -60,7 +60,7 @@ function check(str, valObj) {
 
 // 从第 i 位有没有可能是操作符号，如果是，返回，否则返回false
 function getOperate(i, str) {
-  let opList = [">", "<", "&&", "||", "<=", "!=", "=="];
+  let opList = [">", "<", "&&", "||", "<=", ">=", "!=", "=="];
   let opStr = false;
   if (opList.includes(str.slice(i, i + 2))) {
     opStr = str.slice(i, i + 2);
@@ -275,11 +275,14 @@ function compareVersion(v1, v2) {
   return 0;
 }
 
-console.log(
-  check("a>1&&((b<2||c!=3)||(d==hello&&version<=2.5.0))", { a: 2, b: 3, c: 4, d: "hello", version: "2.5.1" })
-);
 console.log(check("3<4 && 2>3"));
 console.log(check("3<4  && (1 < 3 || a > 6)", { a: 7 }));
 console.log(check("version > 1.1", { a: 7, version: "0.2" }));
 console.log(check("0 && a", { a: 7, version: "0.2" }));
 console.log(check("1 && a", { a: 7, version: "0.2" }));
+console.log(
+  check("a>1&&((b<2||c!=3)||(d==hello&&version<=2.5.0))", { a: 2, b: 3, c: 4, d: "hello", version: "2.5.1" })
+);
+
+console.log(check("2.5.1 == 2.5.0", { a: 7, version: "0.2" }));
+console.log(check("2.5.1 >= 2.5.0", { a: 7, version: "0.2" }));
